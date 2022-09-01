@@ -11,13 +11,16 @@ import java.util.List;
 public interface SmartPostRepository extends MongoRepository<SmartPost, String> {
 
     @RestResource(path = "find-postId")
-    SmartPost findByPostId(@Param("postId") String postId);
+    SmartPost findByPostId(@Param("postId") Integer postId);
 
     @RestResource(path = "find-zoneCode")
     List<SmartPost> findByZoneCode(@Param("zoneCode") String zoneCode);
 
     @RestResource(path = "find-enabled")
     List<SmartPost> findByEnabled(@Param("enabled") Boolean enabled);
+
+    @RestResource(path = "exist-postId")
+    Boolean existsByPostId(@Param("postId") Integer postId);
 
     @RestResource(path = "delete-postId")
     void deleteByPostId(@Param("postId") String postId);
