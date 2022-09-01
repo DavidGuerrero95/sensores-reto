@@ -54,23 +54,31 @@ public class SmartPostController {
         try {
             smartPostRepository.save(smartPost);
             return "Poste inteligente creado correctamente";
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error al crear poste");
         }
     }
 
     @GetMapping("/habilitar-deshabilitar/{postId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public String modificarEnabled(@PathVariable("postId") Integer postId){
-        if(smartPostRepository.existsByPostId(postId)){
+    public String modificarEnabled(@PathVariable("postId") Integer postId) {
+        if (smartPostRepository.existsByPostId(postId)) {
             SmartPost post = smartPostRepository.findByPostId(postId);
-            if(post.getEnabled())
-                post.setEnabled(false);
-            else post.setEnabled(true);
+            post.setEnabled(!post.getEnabled());
             smartPostRepository.save(post);
-            return "El estado del poste: "+postId+" ha cambiado a: "+post.getEnabled();
+            return "El estado del poste: " + postId + " ha cambiado a: " + post.getEnabled();
         }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "El poste: " + postId + " no existe");
+    }
 
+    @DeleteMapping("/eliminar/{postId}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public String eliminarPosteId(@PathVariable("postId") Integer postId) {
+        if (smartPostRepository.existsByPostId(postId)) {
+            smartPostRepository.deleteByPostId(postId);
+            return "Poste: " + postId + " eliminado satisfactoriamente";
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "El poste: " + postId + " no existe");
     }
 
     //  ****************************	FUNCIONES TOLERANCIA A FALLOS	***********************************  //

@@ -23,6 +23,6 @@ public interface SmartPostRepository extends MongoRepository<SmartPost, String> 
     Boolean existsByPostId(@Param("postId") Integer postId);
 
     @RestResource(path = "delete-postId")
-    void deleteByPostId(@Param("postId") String postId);
+    void deleteByPostId(@Param("postId") Integer postId);
 
 }
