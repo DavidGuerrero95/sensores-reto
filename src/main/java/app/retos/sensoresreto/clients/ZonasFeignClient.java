@@ -9,7 +9,7 @@ import java.util.List;
 @FeignClient(name = "zonas-reto")
 public interface ZonasFeignClient {
 
-    @PostMapping("/events/crear/")
+    @PostMapping("/zonas/sensores/crear/")
     Integer crearZonesPosts(@RequestParam("idEvents") Integer idPosts,
                             @RequestParam("location") List<Double> location);
 
