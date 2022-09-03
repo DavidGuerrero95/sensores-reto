@@ -2,6 +2,7 @@ package app.retos.sensoresreto.services;
 
 import app.retos.sensoresreto.clients.ZonasFeignClient;
 import app.retos.sensoresreto.models.Boton;
+import app.retos.sensoresreto.models.Camera;
 import app.retos.sensoresreto.models.Microphone;
 import app.retos.sensoresreto.models.SmartPost;
 import app.retos.sensoresreto.repository.SmartPostRepository;
@@ -30,9 +31,9 @@ public class SmartPostServiceImpl implements ISmartPostService {
     public Boolean crearSmartPost(SmartPost smartPost) {
         smartPost.setPostId(smartPostRepository.findAll().size());
         smartPost.setEnabled(true);
-        smartPost.setCameras(new ArrayList<>());
-        smartPost.setMicrophones(new Microphone());
-        smartPost.setBotons(new Boton());
+        smartPost.setCameras(new Camera("Camara",smartPost.getPostId()));
+        smartPost.setMicrophones(new Microphone(smartPost.getPostId(),""));
+        smartPost.setBotons(new Boton(smartPost.getPostId(), 4));
         smartPost.setZoneCode(cbFactory.create("sensores").run(
                 () -> zonasFeignClient.crearZonesPosts(smartPost.getPostId(), smartPost.getLocation()),
                 this::errorCreacionMuro));

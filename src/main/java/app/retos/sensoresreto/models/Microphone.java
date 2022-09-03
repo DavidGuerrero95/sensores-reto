@@ -19,7 +19,12 @@ public class Microphone {
     @JsonIgnore
     private String id;
 
+    @JsonIgnore
     private Integer postId;
     private String info;
 
+    public Microphone(Integer postId, String info) {
+        this.postId = postId;
+        this.info = info;
+    }
 }

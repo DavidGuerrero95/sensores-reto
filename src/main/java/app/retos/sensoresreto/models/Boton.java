@@ -19,9 +19,18 @@ public class Boton {
     @JsonIgnore
     private String id;
 
+    @JsonIgnore
     private Integer postId;
+
+    @JsonIgnore
     private String userId;
+
+    @JsonIgnore
     private String botonId;
     private Integer type;
 
+    public Boton(Integer postId, Integer type) {
+        this.postId = postId;
+        this.type = type;
+    }
 }
