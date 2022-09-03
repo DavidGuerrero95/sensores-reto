@@ -30,7 +30,7 @@ public class SmartPost {
 
     private Boolean enabled;
     private Integer zoneCode;
-    private List<Camera> cameras;
+    private Camera cameras;
     private Microphone microphones;
     private Boton botons;
 

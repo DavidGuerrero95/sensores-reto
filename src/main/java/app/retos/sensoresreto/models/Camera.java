@@ -20,6 +20,11 @@ public class Camera {
     private String id;
 
     private String name;
+    @JsonIgnore
     private Integer postId;
 
+    public Camera(String name, Integer postId) {
+        this.name = name;
+        this.postId = postId;
+    }
 }
