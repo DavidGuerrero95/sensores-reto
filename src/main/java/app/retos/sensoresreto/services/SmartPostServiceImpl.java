@@ -13,7 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 @Service
 @Slf4j
@@ -29,6 +32,9 @@ public class SmartPostServiceImpl implements ISmartPostService {
 
     @Override
     public Boolean crearSmartPost(SmartPost smartPost) {
+        smartPost.setLocation(new ArrayList<>(Arrays.asList(
+                BigDecimal.valueOf(smartPost.getLocation().get(0)).setScale(5, RoundingMode.HALF_UP).doubleValue(),
+                BigDecimal.valueOf(smartPost.getLocation().get(1)).setScale(5, RoundingMode.HALF_UP).doubleValue())));
         smartPost.setPostId(smartPostRepository.findAll().size());
         smartPost.setEnabled(true);
         smartPost.setCameras(new Camera("Camara",smartPost.getPostId()));
