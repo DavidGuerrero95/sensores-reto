@@ -70,6 +70,12 @@ public class SmartPostController {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "El poste: " + postId + " no existe");
     }
 
+    @DeleteMapping("/eliminar/all")
+    @ResponseStatus(code = HttpStatus.OK)
+    public void eliminarAll(){
+        smartPostRepository.deleteAll();
+    }
+
     //  ****************************	FUNCIONES TOLERANCIA A FALLOS	***********************************  //
     public Integer errorCreacionMuro(Throwable e) {
         log.info("Error creacion zona: " + e.getMessage());
